@@ -121,3 +121,39 @@ Docker proporciona un nivel adicional de aislamiento entre aplicaciones, lo que 
 
 11. Facilita el uso de microservicios:
 Docker es ideal para arquitecturas de microservicios, donde cada servicio puede ser empaquetado y desplegado en su propio contenedor, facilitando la gestión y escalabilidad.
+
+4. Pruebas y Automatización en CI/CD
+
+Tipos de pruebas importantes en un pipeline de CI/CD:
+
+Pruebas Unitarias: Verifican unidades individuales de código.
+Pruebas de Integración: Aseguran que los módulos o servicios funcionen juntos.
+Pruebas de Regresión: Detectan errores en funcionalidades existentes tras cambios.
+Pruebas de Rendimiento: Evalúan el rendimiento del sistema bajo carga.
+Pruebas de Seguridad: Identifican vulnerabilidades y aseguran el cumplimiento de estándares.
+Pruebas de Aceptación: Verifican que el software cumple con los requisitos del negocio.
+Pruebas de Carga: Evalúan el comportamiento del sistema bajo carga extrema.
+Pruebas de Usabilidad: Aseguran que la aplicación sea fácil de usar.
+Pruebas de Compatibilidad: Verifican el funcionamiento en diferentes entornos.
+Pruebas de Humo: Confirman que las funcionalidades críticas funcionan tras un despliegue.
+
+Explica en qué consiste el desarrollo guiado por pruebas (TDD) y su impacto en
+CI/CD.
+
+El Desarrollo Guiado por Pruebas (TDD, por sus siglas en inglés) es una metodología de desarrollo de software que sigue un ciclo iterativo y centrado en las pruebas. Consiste en escribir pruebas antes de implementar el código funcional, lo que ayuda a garantizar que el software cumpla con los requisitos desde el principio.
+
+Ciclo de TDD:
+1. Escribir una prueba
+2. Implementar el código 
+3. Refactorizar 
+
+Una vez que la prueba pasa, se refactoriza el código para mejorar su calidad, manteniendo la funcionalidad intacta.
+
+Esto incluye eliminar duplicaciones, mejorar la legibilidad y optimizar el rendimiento.
+
+Impacto en CI/CD:
+1. Mejora la calidad del código: Fomenta código limpio y modular.
+2. Facilita la Integración Continua (CI): Las pruebas se integran en el pipeline, detectando errores temprano.
+3. Habilita la Entrega Continua (CD): Proporciona pruebas robustas para liberaciones frecuentes y confiables.
+4. Reduce costos: Detecta errores temprano, minimizando costos de corrección.
+5. Aumenta la confianza en los despliegues: El software está validado constantemente.
