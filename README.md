@@ -1,7 +1,7 @@
 # m8-ep1
 Ejercicio Práctico 1: Evaluación de Conceptos DevOps y su Aplicación en Proyectos
 
-1. Fundamentos de DevOps
+## 1. Fundamentos de DevOps
 
 ¿Qué es DevOps y cuál es su propósito principal?
 
@@ -28,7 +28,7 @@ Promueve la alineación organizacional: Ayuda a alinear los objetivos de los equ
 
 El modelo CAMS es fundamental para entender y aplicar DevOps de manera integral, asegurando que tanto las personas como los procesos y las herramientas trabajen en armonía para lograr los objetivos de la organización.
 
-2. Integración y Entrega Continua
+## 2. Integración y Entrega Continua
 
 ¿Cuál es la diferencia entre Integración Continua y Entrega Continua?
 
@@ -59,3 +59,65 @@ La Integración Continua (CI) aporta los siguientes beneficios al desarrollo de 
 4. Acelera el desarrollo: Agiliza el proceso de construcción y pruebas, facilitando entregas más rápidas.
 5. Fomenta la colaboración: Promueve una cultura de responsabilidad compartida entre los desarrolladores.
 
+## 3. Contenedores y Docker
+
+¿Qué es un contenedor y en qué se diferencia de una máquina virtual?
+
+Un contenedor es una unidad ligera y portátil que empaqueta una aplicación junto con sus dependencias (bibliotecas, configuraciones, etc.) en un entorno aislado. Los contenedores comparten el kernel del sistema operativo anfitrión, lo que los hace más eficientes en términos de recursos y tiempo de arranque.
+
+Diferencias entre un contenedor y una máquina virtual (VM):
+
+Contenedor:
+Aislamiento: Aísla procesos, pero comparte el kernel del sistema operativo anfitrión.
+Tamaño: Es ligero, ocupando solo unos pocos MBs.
+Rendimiento: Ofrece mayor eficiencia y menor sobrecarga, ya que no necesita virtualizar hardware.
+Tiempo de arranque: Arranca en segundos.
+Uso de recursos: Consume menos CPU y memoria.
+Portabilidad: Altamente portátil, ya que puede ejecutarse en cualquier entorno que soporte contenedores.
+Escalabilidad: Escalado rápido y sencillo, ideal para aplicaciones modernas y microservicios.
+
+Máquina Virtual (VM):
+Aislamiento: Aísla completamente el sistema operativo y el hardware, proporcionando un entorno totalmente independiente.
+Tamaño: Es más pesada, ocupando varios GBs debido al sistema operativo invitado.
+Rendimiento: Tiene mayor sobrecarga debido a la virtualización del hardware.
+Tiempo de arranque: Tarda minutos en arrancar.
+Uso de recursos: Consume más CPU y memoria.
+Portabilidad: Menos portátil, ya que depende del sistema operativo invitado y del hipervisor.
+Escalabilidad: Escalado más lento y complejo, adecuado para aplicaciones que requieren aislamiento completo.
+
+¿Cuáles son los beneficios del uso de Docker en entornos DevOps?
+
+El uso de Docker en entornos DevOps ofrece numerosos beneficios que mejoran la eficiencia, consistencia y escalabilidad del desarrollo y despliegue de aplicaciones. Aquí están los principales beneficios:
+
+1. Consistencia entre entornos:
+Docker asegura que las aplicaciones se ejecuten de la misma manera en todos los entornos (desarrollo, pruebas, producción), eliminando el problema de "funciona en mi máquina".
+
+2. Aislamiento y portabilidad:
+Los contenedores Docker aíslan las aplicaciones y sus dependencias, lo que permite ejecutarlas en cualquier sistema que soporte Docker, facilitando la portabilidad entre diferentes infraestructuras.
+
+3. Eficiencia en el uso de recursos:
+Los contenedores son más ligeros que las máquinas virtuales, ya que comparten el kernel del sistema operativo anfitrión. Esto resulta en un menor consumo de recursos y un mayor rendimiento.
+
+4. Rápido tiempo de arranque:
+Los contenedores Docker arrancan en segundos, lo que acelera el proceso de desarrollo, pruebas y despliegue.
+
+5. Facilita la integración y entrega continua (CI/CD):
+Docker integra fácilmente con herramientas de CI/CD como Jenkins, GitLab CI, y CircleCI, permitiendo automatizar el proceso de construcción, pruebas y despliegue de aplicaciones.
+
+6. Escalabilidad:
+Docker facilita la escalabilidad horizontal de las aplicaciones. Herramientas como Docker Swarm y Kubernetes permiten gestionar y escalar contenedores de manera eficiente.
+
+7. Simplificación de la gestión de dependencias:
+Docker encapsula todas las dependencias de una aplicación dentro del contenedor, lo que simplifica la gestión y reduce los conflictos entre dependencias.
+
+8. Mejora de la colaboración:
+Los desarrolladores pueden compartir imágenes Docker a través de registros como Docker Hub, lo que facilita la colaboración y el uso de configuraciones consistentes.
+
+9. Reducción de tiempos de configuración:
+La configuración de entornos de desarrollo y producción se simplifica, ya que las imágenes Docker pueden ser creadas y compartidas rápidamente.
+
+10. Seguridad:
+Docker proporciona un nivel adicional de aislamiento entre aplicaciones, lo que mejora la seguridad. Además, las imágenes Docker pueden ser escaneadas en busca de vulnerabilidades.
+
+11. Facilita el uso de microservicios:
+Docker es ideal para arquitecturas de microservicios, donde cada servicio puede ser empaquetado y desplegado en su propio contenedor, facilitando la gestión y escalabilidad.
