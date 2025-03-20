@@ -174,3 +174,37 @@ Importancia del monitoreo en DevOps:
 Herramientas de monitoreo en CI/CD:
 1. Prometheus: Sistema de monitoreo y alerta de código abierto, ampliamente utilizado para métricas en tiempo real.
 2. Grafana: Herramienta de visualización que se integra con Prometheus y otras fuentes de datos para crear paneles de control interactivos.
+
+## 6. Orquestación y Kubernetes
+
+### ¿Cuál es el propósito de un orquestador de contenedores como Kubernetes?
+
+El propósito principal de un orquestador de contenedores como Kubernetes es automatizar la gestión, despliegue, escalado y operación de aplicaciones en contenedores. Aquí están sus funciones clave:
+
+Propósito de Kubernetes:
+Automatización de despliegues: Facilita el lanzamiento y actualización de aplicaciones en contenedores de manera eficiente.
+
+1. Escalabilidad: Ajusta automáticamente el número de contenedores en función de la demanda.
+2. Alta disponibilidad: Garantiza que las aplicaciones estén siempre operativas, incluso en caso de fallos.
+3. Gestión de recursos: Optimiza el uso de CPU, memoria y almacenamiento.
+4. Balanceo de carga: Distribuye el tráfico entre los contenedores para mejorar el rendimiento.
+5. Autocuración: Detecta y reemplaza contenedores fallidos automáticamente.
+6. Portabilidad: Permite ejecutar aplicaciones en diferentes entornos (nube, on-premise, híbridos).
+
+### Explica cómo Kubernetes facilita la escalabilidad y gestión de aplicaciones en producción.
+
+Cómo Kubernetes facilita la escalabilidad y gestión en producción:
+1. Escalabilidad:
+- Escalado automático: Ajusta el número de contenedores (pods) según la demanda (uso de CPU/memoria).
+- Escalado manual: Permite aumentar o reducir réplicas de pods manualmente.
+- Cluster Autoscaler: Ajusta el tamaño del clúster añadiendo o eliminando nodos.
+
+2. Gestión:
+- Despliegues continuos: Facilita actualizaciones y rollbacks automáticos.
+- Balanceo de carga: Distribuye el tráfico entre pods para optimizar rendimiento.
+- Autocuración: Reemplaza pods fallidos automáticamente.
+- Configuraciones y secretos: Centraliza y gestiona configuraciones y datos sensibles.
+- Monitoreo y logging: Supervisa el estado y rendimiento en tiempo real.
+- Gestión de recursos: Optimiza el uso de CPU y memoria.
+- Portabilidad: Ejecuta aplicaciones en múltiples entornos sin cambios.
+
