@@ -320,6 +320,93 @@ Puedes configurar notificaciones para que los desarrolladores sean informados de
 7. Mejorar la Cobertura de las Pruebas
 A medida que el proyecto crezca, es importante aumentar la cobertura de pruebas para garantizar que nuevas funcionalidades y cambios no introduzcan errores. Herramientas como Coveralls o Codecov pueden integrarse a GitLab para medir la cobertura de las pruebas y ayudar a identificar áreas que aún no están suficientemente cubiertas.
 
+## Uso de Contenedores y Orquestación con Docker
 
+Para implementar Docker en el proyecto de desarrollo de la plataforma de gestión y mantenimiento de paneles solares y termos eléctricos, el objetivo principal será crear un entorno aislado y consistente para el desarrollo, las pruebas y la producción, asegurando que la aplicación funcione de la misma manera en cualquier máquina o servidor. A continuación, se describen los pasos para integrar Docker en el proyecto:
 
+1. Creación del Dockerfile
+El primer paso es crear un archivo Dockerfile que defina cómo se construye la imagen Docker para el proyecto. Este archivo contiene las instrucciones necesarias para instalar dependencias, configurar el entorno de ejecución y ejecutar la aplicación.
 
+  ```bash
+ # Usar una imagen base de Node.js
+FROM node:16-alpine
+
+# Definir el directorio de trabajo dentro del contenedor
+WORKDIR /app
+
+# Copiar los archivos de la aplicación al contenedor
+COPY package*.json ./
+
+# Instalar las dependencias del proyecto
+RUN npm install
+
+# Copiar todo el código fuente de la aplicación
+COPY . .
+
+# Construir la aplicación para producción
+RUN npm run build
+
+# Exponer el puerto donde la aplicación escuchará
+EXPOSE 3000
+
+# Comando para iniciar la aplicación
+CMD ["npm", "start"]
+   ```
+
+2. Construcción de la Imagen Docker
+Una vez que el archivo Dockerfile está listo, el siguiente paso es construir la imagen de Docker. Para ello, se ejecuta el siguiente comando en el directorio donde se encuentra el Dockerfile:
+
+  ```bash
+    docker build -t mi-aplicacion .
+   ```
+
+3. Ejecutar el Contenedor Localmente
+Una vez construida la imagen, puedes ejecutar un contenedor basado en ella para probar la aplicación localmente. El siguiente comando ejecutará el contenedor y expondrá el puerto 3000:
+
+  ```bash
+    docker run -p 3000:3000 mi-aplicacion
+   ```
+
+4. Configurar Docker Compose para Orquestación (Si es Necesario)
+Si el proyecto involucra varios servicios, como bases de datos o servicios adicionales, Docker Compose puede utilizarse para orquestar los contenedores. Un archivo docker-compose.yml puede definir cómo se ejecutan y se comunican entre sí estos contenedores.
+
+  ```bash
+version: '3'
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+   ```
+
+5. Construir y Ejecutar el Proyecto con Docker Compose
+Con el archivo docker-compose.yml listo, puedes construir y ejecutar todos los contenedores definidos de forma sencilla utilizando el siguiente comando:
+
+  ```bash
+    docker-compose up --build
+   ```
+
+6. Despliegue de Contenedores en Producción
+
+En producción, puedes desplegar los contenedores Docker en servidores o plataformas como AWS ECS, Azure Kubernetes Service (AKS) o Google Kubernetes Engine (GKE), utilizando Kubernetes para la orquestación avanzada de contenedores si es necesario. Esto te permitirá gestionar los contenedores de forma escalable, automatizada y eficiente.
+
+7. Ventajas de Usar Docker en el Proyecto
+- Consistencia de Entornos: Docker asegura que la aplicación se ejecute en el mismo entorno de desarrollo, pruebas y producción, eliminando problemas de "funciona en mi máquina".
+
+- Escalabilidad: Usar Docker junto con herramientas de orquestación como Kubernetes permite escalar la aplicación de manera eficiente según la demanda.
+
+- Facilidad de Despliegue: Docker simplifica el proceso de despliegue en producción, ya que cualquier servidor con Docker instalado puede ejecutar los contenedores sin importar el sistema operativo subyacente.
+
+- Aislamiento de Servicios: Cada servicio (por ejemplo, la base de datos y la aplicación) puede ejecutarse en su propio contenedor, lo que facilita la administración y mantenimiento de cada componente de la aplicación de forma independiente.
