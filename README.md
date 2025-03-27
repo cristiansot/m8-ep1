@@ -208,3 +208,16 @@ Cómo Kubernetes facilita la escalabilidad y gestión en producción:
 - Gestión de recursos: Optimiza el uso de CPU y memoria.
 - Portabilidad: Ejecuta aplicaciones en múltiples entornos sin cambios.
 
+# Parte 2: Informe Aplicado a un Proyecto
+
+## 1. Introducción
+
+El proyecto consiste en el desarrollo de una plataforma web para la gestión y mantenimiento de paneles solares y termos eléctricos, con el objetivo de facilitar el seguimiento del historial de mantenimiento, control de fallos y programación de nuevas intervenciones.
+
+A lo largo del desarrollo de este proyecto, se implementarán las prácticas y herramientas de DevOps para optimizar la colaboración entre los equipos de desarrollo y operaciones, mejorar la calidad del software y garantizar la entrega continua de nuevas funcionalidades, así como la actualización y corrección de errores de forma eficiente. Esto se logrará mediante la integración continua (CI), entrega continua (CD), automatización de pruebas y monitoreo de la aplicación en tiempo real.
+
+
+
+
+
+
