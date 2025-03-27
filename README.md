@@ -216,7 +216,109 @@ El proyecto consiste en el desarrollo de una plataforma web para la gestión y m
 
 A lo largo del desarrollo de este proyecto, se implementarán las prácticas y herramientas de DevOps para optimizar la colaboración entre los equipos de desarrollo y operaciones, mejorar la calidad del software y garantizar la entrega continua de nuevas funcionalidades, así como la actualización y corrección de errores de forma eficiente. Esto se logrará mediante la integración continua (CI), entrega continua (CD), automatización de pruebas y monitoreo de la aplicación en tiempo real.
 
+## 2 Aplicación de Integración y Entrega Continua
 
+Para aplicar los conceptos de Integración y Entrega Continua (CI/CD) en el desarrollo de la aplicación de gestión y mantenimiento de paneles solares y termos eléctricos, se configurará un pipeline utilizando GitLab CI/CD. Este pipeline automatizará todo el proceso de desarrollo, desde la integración de cambios hasta la entrega de nuevas versiones del software, asegurando una entrega rápida y sin errores. A continuación, se describe cómo configuraríamos este pipeline:
+
+1. Repositorio en GitLab: El código fuente del proyecto se almacenará en un repositorio de GitLab. Los desarrolladores enviarán sus cambios a través de merge requests para que sean revisados antes de ser integrados al branch principal (por ejemplo, main).
+
+2. Archivo .gitlab-ci.yml: En el repositorio se creará un archivo de configuración llamado .gitlab-ci.yml. Este archivo define las etapas y los trabajos que deben ejecutarse durante el pipeline. Las etapas clave incluyen:
+
+- Instalación de dependencias: En esta etapa se instalarán las dependencias del proyecto, como las bibliotecas de JavaScript necesarias (por ejemplo, npm install si el proyecto está en React).
+
+- Pruebas automatizadas: Se ejecutarán pruebas unitarias y de integración utilizando herramientas como Jest o Mocha, garantizando que el código nuevo no rompa funcionalidades existentes.
+
+- Análisis estático de código: Se integrará una herramienta de análisis estático de código, como ESLint o SonarQube, para verificar la calidad del código y aplicar estándares de codificación.
+
+- Construcción del proyecto: Se compilará el proyecto (por ejemplo, npm run build para una aplicación en React), creando una versión optimizada para producción.
+
+- Despliegue en entorno de prueba (staging): Después de pasar todas las pruebas, el código se desplegará automáticamente en un entorno de prueba para validación adicional.
+
+3. Entrega Continua (CD):
+
+- Despliegue a producción: Si todo el proceso de CI se completa con éxito, el pipeline procederá a desplegar la versión construida a un entorno de producción (por ejemplo, un servidor de producción o un servicio de hosting como AWS, Heroku, o Netlify).
+
+- Versionado y etiquetado: Durante el despliegue, se etiquetarán las versiones del código con un número de versión (por ejemplo, v1.0.0) para facilitar el seguimiento de cambios.
+
+4. Automatización de Notificaciones: Se configurarán notificaciones de GitLab para informar a los desarrolladores del estado del pipeline (si pasó o falló) y proporcionar detalles sobre el error, en caso de que ocurra algún fallo durante el proceso.
+
+5. Monitoreo del Pipeline: GitLab ofrece un monitoreo visual del pipeline, lo que permite a los equipos de desarrollo y operaciones hacer un seguimiento continuo del estado de la integración y entrega, asegurando la transparencia en todo el proceso.
+
+## Pasos para integrar pruebas automatizadas en el pipeline
+
+Para integrar pruebas automatizadas en el pipeline de CI/CD en GitLab, es necesario seguir una serie de pasos para garantizar que el código nuevo no introduzca errores y cumpla con los estándares de calidad antes de ser desplegado. A continuación, se describen los pasos para integrar pruebas automatizadas de manera efectiva:
+
+1. Configurar las Dependencias de Pruebas
+Primero, debes asegurarte de que las dependencias necesarias para ejecutar las pruebas estén correctamente configuradas en tu proyecto. Si estás trabajando con un proyecto en JavaScript (por ejemplo, una aplicación React), puedes usar herramientas como Jest, Mocha o Cypress para realizar las pruebas. Aquí te mostramos cómo instalar Jest como ejemplo:
+
+- Instalar Jest en tu proyecto:
+
+  ```bash
+    npm install --save-dev jest
+   ```
+-Configurar Jest en tu archivo package.json:
+
+  ```bash
+    "scripts": {
+    "test": "jest"
+    }
+   ```
+
+2. Escribir las Pruebas Automatizadas
+Escribe las pruebas unitarias y de integración necesarias para validar el comportamiento del software. Estas pruebas deben cubrir:
+
+Pruebas unitarias: Validan la lógica individual de las funciones o componentes.
+
+Pruebas de integración: Validan cómo interactúan varias partes del sistema (por ejemplo, comunicación entre un servicio y la base de datos).
+
+3. Configurar el Pipeline en GitLab (Archivo .gitlab-ci.yml)
+Una vez que las pruebas están escritas y las dependencias instaladas, es momento de integrarlas en el pipeline de CI/CD. Para ello, debes modificar el archivo .gitlab-ci.yml para incluir una etapa de pruebas.
+
+ ```bash
+    stages:
+  - test
+  - build
+  - deploy
+
+# Etapa de pruebas
+test:
+  stage: test
+  script:
+    - npm install        # Instala las dependencias
+    - npm test           # Ejecuta las pruebas
+  only:
+    - merge_requests    # Ejecutar solo para las solicitudes de fusión
+
+# Etapa de construcción (build)
+build:
+  stage: build
+  script:
+    - npm run build     # Construye la versión de producción
+
+# Etapa de despliegue
+deploy:
+  stage: deploy
+  script:
+    - ./deploy.sh       # Script de despliegue
+  only:
+    - main              # Despliegue solo en el branch principal
+   ```
+
+4. Ejecutar las Pruebas Automatizadas Durante el Pipeline
+En el paso anterior, la sección test del pipeline se asegura de que las pruebas se ejecuten cada vez que se ejecute el pipeline. Esto ocurre de la siguiente forma:
+
+- Cuando se realiza un merge request o se hace push a la rama, GitLab ejecuta el pipeline.
+- El pipeline inicia la instalación de dependencias (npm install), luego ejecuta las pruebas (npm test).
+- Si las pruebas pasan correctamente, el pipeline continúa con las etapas posteriores (como la construcción y el despliegue). Si alguna prueba falla, el pipeline se detendrá y notificará a los desarrolladores.
+
+5. Verificación de los Resultados de las Pruebas
+Al finalizar el pipeline, puedes ver los resultados de las pruebas automatizadas en la interfaz de GitLab, en la sección de "Pipelines". Si alguna prueba falla, GitLab mostrará el error en la salida del log, lo que te permitirá identificar y solucionar rápidamente el problema.
+
+6. Configurar Notificaciones (Opcional)
+Puedes configurar notificaciones para que los desarrolladores sean informados del estado de las pruebas. GitLab puede enviar notificaciones a través de correo electrónico, Slack o cualquier otro canal de comunicación configurado, para alertar sobre fallos o éxitos en las pruebas.
+
+7. Mejorar la Cobertura de las Pruebas
+A medida que el proyecto crezca, es importante aumentar la cobertura de pruebas para garantizar que nuevas funcionalidades y cambios no introduzcan errores. Herramientas como Coveralls o Codecov pueden integrarse a GitLab para medir la cobertura de las pruebas y ayudar a identificar áreas que aún no están suficientemente cubiertas.
 
 
 
